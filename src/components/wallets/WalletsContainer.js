@@ -4,16 +4,20 @@ import { WalletData } from "./walletData/WalletData";
 import { WalletSelector } from "./walletSelector/WalletSelector";
 import styles from "./styles.module.css";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { removeWallet, selectWallet, setFavorite } from "../../store/actions/wallet.actions";
 
 export const WalletsContainer = ({
-  wallets,
-  selectedWallet,
-  selectWallet,
   addWallet,
-  removeWallet,
-  setFavorite,
 }) => {
+  const { wallets, selectedWallet } = useSelector(({wallets}) => wallets);
+  const dispatch = useDispatch();
   const [seeFavorites, setSeeFavorites] = useState(false);
+
+  const _handleSelect = (id) => dispatch(selectWallet(id));
+  const _handleRemove = (id) => dispatch(removeWallet(id));
+  const _handleFavorite = (id, favorite) => dispatch(setFavorite(id, favorite));
+
   return (
     <Row justify="center">
       <Col className={styles.col} span={12}>
@@ -50,7 +54,7 @@ export const WalletsContainer = ({
               <WalletSelector
                 wallets={seeFavorites?wallets.filter(wallet => wallet.isFavorite):wallets}
                 defaultValue={selectedWallet}
-                onChange={selectWallet}
+                onChange={_handleSelect}
               />
             </Col>
           </Row>
@@ -61,8 +65,8 @@ export const WalletsContainer = ({
           <Typography.Title>Wallet data</Typography.Title>
           <WalletData
             wallet={wallets.find((wallet) => wallet.id === selectedWallet)}
-            onDelete={removeWallet}
-            onFavorite={setFavorite}
+            onDelete={_handleRemove}
+            onFavorite={_handleFavorite}
           />
         </Card>
       </Col>

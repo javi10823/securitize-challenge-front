@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ExchangeContainer } from "../components/exchange/ExchangeContainer";
 import { AddWalletModal } from "../components/wallets/addWalletModal/AddWalletModal";
 import { WalletsContainer } from "../components/wallets/WalletsContainer";
@@ -8,51 +8,35 @@ import {
   createWallet,
   getWallets,
   selectWallet,
-  removeWallet,
-  setFavorite,
 } from "../store/actions/wallet.actions";
 
-const HomeScreenComponent = ({
-  wallets,
-  selectedWallet,
-  getWallets,
-  selectWallet,
-  createWallet,
-  removeWallet,
-  setFavorite,
-
-  rates,
-  getRates,
-  modifyRates,
-}) => {
+export const HomeScreen = () => {
+  const dispatch = useDispatch();
+  const { wallets, selectedWallet } = useSelector((state) => state.wallets);
+  const { rates } = useSelector((state) => state.exchange)
   const [showAddWalletModal, setShowAddWalletModal] = useState(false);
 
   const _handleCreate = (address) => {
-    createWallet(address);
+    dispatch(createWallet(address));
     setShowAddWalletModal(false);
   };
 
   useEffect(() => {
-    getWallets();
-    getRates();
-  }, [getWallets, getRates]);
+    dispatch(getWallets());
+    dispatch(getRates());
+  }, [dispatch]);
 
   useEffect(() => {
     if (wallets?.length > 0) {
-      console.log("first wallet", wallets[0]);
-      selectWallet(wallets[0].id);
+      dispatch(selectWallet(wallets[0].id));
     }
-  }, [selectWallet, wallets]);
+  }, [dispatch, wallets]);
 
   return (
     <>
       <WalletsContainer
         wallets={wallets}
-        selectWallet={selectWallet}
-        selectedWallet={selectedWallet}
         addWallet={() => setShowAddWalletModal(true)}
-        removeWallet={removeWallet}
-        setFavorite={setFavorite}
       />
 
       <ExchangeContainer
@@ -60,7 +44,7 @@ const HomeScreenComponent = ({
           wallets.find((wallet) => wallet.id === selectedWallet)?.balance
         }
         rates={rates}
-        modifyRates={modifyRates}
+        modifyRates={(currency, rates) => dispatch(modifyRates(currency, rates))}
       />
 
       <AddWalletModal
@@ -71,24 +55,3 @@ const HomeScreenComponent = ({
     </>
   );
 };
-
-const mapStateToProps = (state) => ({
-  ...state.wallets,
-  ...state.exchange,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getWallets: () => dispatch(getWallets()),
-  selectWallet: (id) => dispatch(selectWallet(id)),
-  createWallet: (address) => dispatch(createWallet(address)),
-  removeWallet: (id) => dispatch(removeWallet(id)),
-  setFavorite: (id, favorite) => dispatch(setFavorite(id, favorite)),
-
-  getRates: () => dispatch(getRates()),
-  modifyRates: (currency, rates) => dispatch(modifyRates(currency, rates)),
-});
-
-export const HomeScreen = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomeScreenComponent);
