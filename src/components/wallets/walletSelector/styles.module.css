@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: scroll;
+  max-height: 251px;
+}
+
+.button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

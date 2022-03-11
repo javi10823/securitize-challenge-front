@@ -1,26 +1,90 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { ExchangeContainer } from "../components/exchange/ExchangeContainer";
+import { AddWalletModal } from "../components/wallets/addWalletModal/AddWalletModal";
 import { WalletsContainer } from "../components/wallets/WalletsContainer";
-import { GET_WALLETS_REQUEST } from "../store/reducers/wallets.reducer";
+import { getRates, modifyRates } from "../store/actions/exchange.actions";
+import {
+  createWallet,
+  getWallets,
+  selectWallet,
+  removeWallet,
+} from "../store/actions/wallet.actions";
 
-const HomeScreenComponent = ({ wallets, getWallets }) => {
+const HomeScreenComponent = ({
+  wallets,
+  selectedWallet,
+  getWallets,
+  selectWallet,
+  createWallet,
+  removeWallet,
+
+  rates,
+  getRates,
+  modifyRates,
+}) => {
+  const [showAddWalletModal, setShowAddWalletModal] = useState(false);
+
+  const _handleCreate = (address) => {
+    createWallet(address);
+    setShowAddWalletModal(false);
+  };
+
   useEffect(() => {
     getWallets();
-  }, [getWallets]);
+    getRates();
+  }, [getWallets, getRates]);
+
+  useEffect(() => {
+    if (wallets?.length > 0) {
+      console.log("first wallet", wallets[0]);
+      selectWallet(wallets[0].id);
+    }
+  }, [selectWallet, wallets]);
 
   return (
-      <>
-        <WalletsContainer wallets={wallets} />
-      </>
-  )
+    <>
+      <WalletsContainer
+        wallets={wallets}
+        selectWallet={selectWallet}
+        selectedWallet={selectedWallet}
+        addWallet={() => setShowAddWalletModal(true)}
+        removeWallet={removeWallet}
+      />
+
+      <ExchangeContainer
+        ethBalance={
+          wallets.find((wallet) => wallet.id === selectedWallet)?.balance
+        }
+        rates={rates}
+        modifyRates={modifyRates}
+      />
+
+      <AddWalletModal
+        visible={showAddWalletModal}
+        onSubmit={_handleCreate}
+        onClose={() => setShowAddWalletModal(false)}
+      />
+    </>
+  );
 };
 
 const mapStateToProps = (state) => ({
-    wallets: state.wallets.wallets,
-})
+  ...state.wallets,
+  ...state.exchange,
+});
 
 const mapDispatchToProps = (dispatch) => ({
-    getWallets: () => dispatch({ type: GET_WALLETS_REQUEST }),
-})
+  getWallets: () => dispatch(getWallets()),
+  selectWallet: (id) => dispatch(selectWallet(id)),
+  createWallet: (address) => dispatch(createWallet(address)),
+  removeWallet: (id) => dispatch(removeWallet(id)),
 
-export const HomeScreen = connect(mapStateToProps, mapDispatchToProps)(HomeScreenComponent)
+  getRates: () => dispatch(getRates()),
+  modifyRates: (currency, rates) => dispatch(modifyRates(currency, rates)),
+});
+
+export const HomeScreen = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeScreenComponent);
