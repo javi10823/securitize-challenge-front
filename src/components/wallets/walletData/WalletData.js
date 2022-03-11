@@ -1,6 +1,9 @@
-import { Button, List, Popconfirm } from "antd";
+import { Button, List, Tooltip, Popconfirm } from "antd";
+import { StarFilled, StarOutlined } from "@ant-design/icons";
 
-export const WalletData = ({ wallet, onDelete }) => {
+import styles from './styles.module.css';
+
+export const WalletData = ({ wallet, onDelete, onFavorite }) => {
   const data = [
     {
       name: "Wallet Address",
@@ -37,6 +40,20 @@ export const WalletData = ({ wallet, onDelete }) => {
           Remove Wallet
         </Button>
       </Popconfirm>
+
+      <Tooltip
+        title={
+          wallet?.isFavorite ? "Remove from favorites" : "Add to Favorites"
+        }>
+        <Button
+          shape="circle"
+          onClick={() => onFavorite(wallet?.id, !wallet?.isFavorite)}
+          icon={
+            wallet?.isFavorite ? <StarFilled color="#F5C242" /> : <StarOutlined />
+          }
+          className={styles.setFavorite}
+        />
+      </Tooltip>
     </div>
   );
 };

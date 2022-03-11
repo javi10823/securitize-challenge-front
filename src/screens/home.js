@@ -9,6 +9,7 @@ import {
   getWallets,
   selectWallet,
   removeWallet,
+  setFavorite,
 } from "../store/actions/wallet.actions";
 
 const HomeScreenComponent = ({
@@ -18,6 +19,7 @@ const HomeScreenComponent = ({
   selectWallet,
   createWallet,
   removeWallet,
+  setFavorite,
 
   rates,
   getRates,
@@ -50,6 +52,7 @@ const HomeScreenComponent = ({
         selectedWallet={selectedWallet}
         addWallet={() => setShowAddWalletModal(true)}
         removeWallet={removeWallet}
+        setFavorite={setFavorite}
       />
 
       <ExchangeContainer
@@ -79,6 +82,7 @@ const mapDispatchToProps = (dispatch) => ({
   selectWallet: (id) => dispatch(selectWallet(id)),
   createWallet: (address) => dispatch(createWallet(address)),
   removeWallet: (id) => dispatch(removeWallet(id)),
+  setFavorite: (id, favorite) => dispatch(setFavorite(id, favorite)),
 
   getRates: () => dispatch(getRates()),
   modifyRates: (currency, rates) => dispatch(modifyRates(currency, rates)),

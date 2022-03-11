@@ -2,7 +2,6 @@ import { Col, Row, Select, Typography } from "antd";
 import styles from './style.module.css';
 
 export const Balance = ({ ethBalance, rates, selectedRate, onModify }) => {
-    console.log({ ethBalance, rates, selectedRate })
   return (
     <div>
       <Row>
@@ -18,7 +17,7 @@ export const Balance = ({ ethBalance, rates, selectedRate, onModify }) => {
       </Row>
       <Row>
         <Col>
-          <Typography.Title>{ethBalance * parseInt(rates[selectedRate].rates)}</Typography.Title>
+          <Typography.Title>{ethBalance * parseInt(rates[selectedRate]?.rates) || 0}</Typography.Title>
         </Col>
       </Row>
     </div>

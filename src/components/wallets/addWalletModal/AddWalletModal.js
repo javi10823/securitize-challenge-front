@@ -1,6 +1,5 @@
-import { Button, Form, Input, Modal } from "antd";
+import { Form, Input, Modal } from "antd";
 import { useState } from "react";
-import styles from "./styles.module.css";
 
 export const AddWalletModal = ({ visible, onSubmit, onClose }) => {
   const [address, setAddress] = useState("");

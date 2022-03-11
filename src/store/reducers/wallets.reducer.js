@@ -10,6 +10,10 @@ export const REMOVE_WALLETS_REQUEST = "RemoveWalletsRequest";
 export const REMOVE_WALLETS_REQUEST_SUCCESS = "RemoveWalletsRequestSuccess";
 export const REMOVE_WALLETS_REQUEST_FAILED = "RemoveWalletsRequestFailed";
 
+export const SET_FAVORITE_REQUEST = "SetFavoriteRequest";
+export const SET_FAVORITE_REQUEST_SUCCESS = "SetFavoriteRequestSuccess";
+export const SET_FAVORITE_REQUEST_FAILED = "SetFavoriteRequestFailed";
+
 export const SELECT_WALLET = "SellectWallet";
 
 const initialState = {
@@ -26,7 +30,18 @@ export const walletReducer = (state = initialState, action) => {
     case CREATE_WALLETS_REQUEST_SUCCESS:
       return { ...state, wallets: action.payload };
     case REMOVE_WALLETS_REQUEST_SUCCESS:
-      return { ...state, wallets: action.payload, selectedWallet: action.payload[0]?.id || null };
+      return {
+        ...state,
+        wallets: action.payload,
+        selectedWallet: action.payload[0]?.id || null,
+      };
+    case SET_FAVORITE_REQUEST_SUCCESS:
+      return {
+        ...state,
+        wallets: state.wallets.map((wallet) =>
+          wallet.id === action.payload.id ? action.payload : wallet
+        ),
+      };
     default:
       return state;
   }

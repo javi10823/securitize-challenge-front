@@ -1,8 +1,9 @@
 import { Button, Card, Col, Row, Tooltip, Typography } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
 import { WalletData } from "./walletData/WalletData";
 import { WalletSelector } from "./walletSelector/WalletSelector";
 import styles from "./styles.module.css";
+import { useState } from "react";
 
 export const WalletsContainer = ({
   wallets,
@@ -10,8 +11,9 @@ export const WalletsContainer = ({
   selectWallet,
   addWallet,
   removeWallet,
+  setFavorite,
 }) => {
-  console.log({ wallets, selectedWallet });
+  const [seeFavorites, setSeeFavorites] = useState(false);
   return (
     <Row justify="center">
       <Col className={styles.col} span={12}>
@@ -19,17 +21,34 @@ export const WalletsContainer = ({
           <Row>
             <Col flex="auto">
               <Typography.Title>Select a wallet</Typography.Title>
+              <Tooltip title="See favorites">
+                <Button
+                  shape="circle"
+                  icon={
+                    seeFavorites ? (
+                      <StarFilled color="#F5C242" />
+                    ) : (
+                      <StarOutlined />
+                    )
+                  }
+                  onClick={() => setSeeFavorites(!seeFavorites)}
+                />
+              </Tooltip>
             </Col>
             <Col>
               <Tooltip title="Add new wallet">
-                <Button shape="circle" icon={<PlusOutlined />} onClick={addWallet} />
+                <Button
+                  shape="circle"
+                  icon={<PlusOutlined />}
+                  onClick={addWallet}
+                />
               </Tooltip>
             </Col>
           </Row>
           <Row justify="center">
             <Col>
               <WalletSelector
-                wallets={wallets}
+                wallets={seeFavorites?wallets.filter(wallet => wallet.isFavorite):wallets}
                 defaultValue={selectedWallet}
                 onChange={selectWallet}
               />
@@ -43,6 +62,7 @@ export const WalletsContainer = ({
           <WalletData
             wallet={wallets.find((wallet) => wallet.id === selectedWallet)}
             onDelete={removeWallet}
+            onFavorite={setFavorite}
           />
         </Card>
       </Col>

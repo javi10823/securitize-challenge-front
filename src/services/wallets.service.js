@@ -10,4 +10,7 @@ export const walletsApi = {
   removeWallet: (id) => {
     return axios.delete(process.env.REACT_APP_API_URL + "/wallets", { id });
   },
+  setFavorite: (id, favorite) => {
+    return axios.put(process.env.REACT_APP_API_URL + "/wallets/favorite", { id, favorite });
+  }
 };
