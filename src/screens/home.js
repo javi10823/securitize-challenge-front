@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ExchangeContainer } from "../components/exchange/ExchangeContainer";
-import { AddWalletModal } from "../components/wallets/addWalletModal/AddWalletModal";
-import { WalletsContainer } from "../components/wallets/WalletsContainer";
-import { getRates, modifyRates } from "../store/actions/exchange.actions";
+import { ExchangeContainer } from "../components/exchange";
+import { AddWalletModal } from "../components/wallets/addWalletModal";
+import { WalletsContainer } from "../components/wallets";
+import { getRates, modifyRates } from "../store/actions/exchange";
 import {
   createWallet,
   getWallets,
   selectWallet,
-} from "../store/actions/wallet.actions";
+} from "../store/actions/wallet";
 
 export const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export const HomeScreen = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (wallets?.length > 0) {
+    if (wallets?.length > 0 && selectWallet === null) {
       dispatch(selectWallet(wallets[0].id));
     }
   }, [dispatch, wallets]);

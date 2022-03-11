@@ -1,7 +1,7 @@
 import { Row, Card, Col } from "antd";
 import { useState } from "react";
-import { Balance } from "./balance/Balance";
-import { Rates } from "./rates/Rates";
+import { Balance } from "./balance";
+import { Rates } from "./rates";
 import styles from "./styles.module.css";
 
 export const ExchangeContainer = ({ ethBalance, rates, modifyRates }) => {

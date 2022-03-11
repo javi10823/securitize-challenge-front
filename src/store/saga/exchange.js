@@ -1,12 +1,12 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { exchangeApi } from "../../services/exchange.service";
+import { exchangeApi } from "../../services/exchange";
 import {
   GET_RATES_REQUEST,
   GET_RATES_REQUEST_FAILED,
   GET_RATES_REQUEST_SUCCESS,
   MODIFY_RATES_REQUEST,
   MODIFY_RATES_REQUEST_FAILED,
-} from "../reducers/exchange.reducer";
+} from "../reducers/exchange";
 
 function* getRates(action) {
   try {

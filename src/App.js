@@ -1,10 +1,6 @@
-import './App.css';
-import { NavigationContainer } from './navigation/NavigationContainer';
+import "./App.css";
+import { NavigationContainer } from "./navigation/NavigationContainer";
 
-function App() {
-  return (
-    <NavigationContainer />
-  );
-}
+const App = () => <NavigationContainer />;
 
 export default App;

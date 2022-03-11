@@ -1,11 +1,11 @@
 import { Button, Card, Col, Row, Tooltip, Typography } from "antd";
 import { PlusOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
-import { WalletData } from "./walletData/WalletData";
-import { WalletSelector } from "./walletSelector/WalletSelector";
+import { WalletData } from "./walletData";
+import { WalletSelector } from "./walletSelector";
 import styles from "./styles.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeWallet, selectWallet, setFavorite } from "../../store/actions/wallet.actions";
+import { removeWallet, selectWallet, setFavorite } from "../../store/actions/wallet";
 
 export const WalletsContainer = ({
   addWallet,
