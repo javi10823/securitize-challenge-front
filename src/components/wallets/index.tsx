@@ -21,6 +21,12 @@ export const WalletsContainer = ({ addWallet }) => {
   const _handleRemove = (id) => dispatch(removeWallet(id));
   const _handleFavorite = (id, favorite) => dispatch(setFavorite(id, favorite));
 
+  const getSelectedWallet = () => {
+    if (wallets.length === 1) return wallets[0];
+
+    return wallets.find((wallet) => wallet.id === selectedWallet) || {};
+  };
+
   return (
     <Row justify="center">
       <Col className={styles.col} span={12}>
@@ -57,7 +63,7 @@ export const WalletsContainer = ({ addWallet }) => {
               <WalletSelector
                 wallets={
                   seeFavorites
-                    ? wallets.filter((wallet) => wallet.isFavorite)
+                    ? wallets.filter(({ isFavorite }) => isFavorite)
                     : wallets
                 }
                 defaultValue={selectedWallet}
@@ -69,9 +75,9 @@ export const WalletsContainer = ({ addWallet }) => {
       </Col>
       <Col className={styles.col} span={12}>
         <Card className={styles.card}>
-          <Typography.Title>Wallet data</Typography.Title>
+          <Typography.Title>Wallet Data</Typography.Title>
           <WalletData
-            wallet={wallets.find((wallet) => wallet.id === selectedWallet)}
+            wallet={getSelectedWallet()}
             onDelete={_handleRemove}
             onFavorite={_handleFavorite}
           />

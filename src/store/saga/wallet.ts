@@ -5,7 +5,6 @@ import { CREATE_WALLETS_REQUEST, CREATE_WALLETS_REQUEST_FAILED, CREATE_WALLETS_R
 function* getWallets(action) {
     try {
         const result = yield call(walletsApi.getWallets);
-        console.log('getWallets', {result})
         yield put({type: GET_WALLETS_REQUEST_SUCCESS, payload: result.data })
     } catch (error) {
         console.error('getWalletsRequest', error)
@@ -15,8 +14,7 @@ function* getWallets(action) {
 
 function* createWallet(action) {
     try {
-        const result = yield call(walletsApi.createWallet, action.payload);
-        console.log('createWallet', {result})
+        yield call(walletsApi.createWallet, action.payload);
         const newWallets = yield call(walletsApi.getWallets);
         yield put({type: CREATE_WALLETS_REQUEST_SUCCESS, payload: newWallets.data});
     } catch (error) {
@@ -37,7 +35,6 @@ function* removeWallet(action) {
 function* setFavorite(action) {
     try {
         const result = yield call(walletsApi.setFavorite, action.payload.id, action.payload.favorite);
-        console.log('setFavorite', {result});
         yield put({type: SET_FAVORITE_REQUEST_SUCCESS, payload: result.data});
     } catch (error) {
         yield put({type: SET_FAVORITE_REQUEST_FAILED, payload: error})

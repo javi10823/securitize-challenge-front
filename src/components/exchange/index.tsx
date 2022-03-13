@@ -23,7 +23,12 @@ export const ExchangeContainer = ({ ethBalance, rates, modifyRates }) => {
       </Col>
       <Col className={styles.col} span={12}>
         <Card className={styles.card}>
-          <Balance ethBalance={ethBalance} rates={rates} selectedRate={selectedRate} onModify={setSelectedRate} />
+          <Balance
+            ethBalance={ethBalance}
+            rates={rates}
+            selectedRate={selectedRate}
+            onModify={setSelectedRate}
+          />
         </Card>
       </Col>
     </Row>

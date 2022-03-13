@@ -11,7 +11,6 @@ import {
 function* getRates(action) {
   try {
     const result = yield call(exchangeApi.getRates);
-    console.log('getRates', { result });
     yield put({ type: GET_RATES_REQUEST_SUCCESS, payload: result.data })
   } catch (error) {
     yield put({ type: GET_RATES_REQUEST_FAILED, payload: error });
@@ -20,8 +19,7 @@ function* getRates(action) {
 
 function* modifyRates(action) {
   try {
-    const result = yield call(exchangeApi.modifyRates, action.payload.currency, action.payload.rates);
-    console.log('modifyRates', { result });
+    yield call(exchangeApi.modifyRates, action.payload.currency, action.payload.rates);
     const newRates = yield call(exchangeApi.getRates);
     yield put({ type: GET_RATES_REQUEST_SUCCESS, payload: newRates.data })
   } catch (error) {
