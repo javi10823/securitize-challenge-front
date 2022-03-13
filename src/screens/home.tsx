@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ExchangeContainer } from "../components/exchange";
 import { AddWalletModal } from "../components/wallets/addWalletModal";
 import { WalletsContainer } from "../components/wallets";
@@ -9,11 +9,12 @@ import {
   getWallets,
   selectWallet,
 } from "../store/actions/wallet";
+import { useAppSelector } from "../hooks";
 
 export const HomeScreen = () => {
   const dispatch = useDispatch();
-  const { wallets, selectedWallet } = useSelector((state) => state.wallets);
-  const { rates } = useSelector((state) => state.exchange)
+  const { wallets, selectedWallet } = useAppSelector(({ wallets }) => wallets);
+  const { rates } = useAppSelector(({ exchange }) => exchange);
   const [showAddWalletModal, setShowAddWalletModal] = useState(false);
 
   const _handleCreate = (address) => {
@@ -27,24 +28,23 @@ export const HomeScreen = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (wallets?.length > 0 && selectWallet === null) {
+    if (wallets?.length > 0 && selectedWallet === null) {
       dispatch(selectWallet(wallets[0].id));
     }
-  }, [dispatch, wallets]);
+  }, [dispatch, wallets, selectedWallet]);
 
   return (
     <>
-      <WalletsContainer
-        wallets={wallets}
-        addWallet={() => setShowAddWalletModal(true)}
-      />
+      <WalletsContainer addWallet={() => setShowAddWalletModal(true)} />
 
       <ExchangeContainer
         ethBalance={
           wallets.find((wallet) => wallet.id === selectedWallet)?.balance
         }
         rates={rates}
-        modifyRates={(currency, rates) => dispatch(modifyRates(currency, rates))}
+        modifyRates={(currency, rates) =>
+          dispatch(modifyRates(currency, rates))
+        }
       />
 
       <AddWalletModal

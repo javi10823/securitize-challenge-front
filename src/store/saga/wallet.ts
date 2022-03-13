@@ -26,8 +26,7 @@ function* createWallet(action) {
 
 function* removeWallet(action) {
     try {
-        const result = yield call(walletsApi.removeWallet, action.payload);
-        console.log('removeWallet', {result})
+        yield call(walletsApi.removeWallet);
         const newWallets = yield call(walletsApi.getWallets);
         yield put({type: REMOVE_WALLETS_REQUEST_SUCCESS, payload: newWallets.data});
     } catch (error) {

@@ -4,13 +4,16 @@ import { WalletData } from "./walletData";
 import { WalletSelector } from "./walletSelector";
 import styles from "./styles.module.css";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { removeWallet, selectWallet, setFavorite } from "../../store/actions/wallet";
+import { useDispatch } from "react-redux";
+import {
+  removeWallet,
+  selectWallet,
+  setFavorite,
+} from "../../store/actions/wallet";
+import { useAppSelector } from "../../hooks";
 
-export const WalletsContainer = ({
-  addWallet,
-}) => {
-  const { wallets, selectedWallet } = useSelector(({wallets}) => wallets);
+export const WalletsContainer = ({ addWallet }) => {
+  const { wallets, selectedWallet } = useAppSelector(({ wallets }) => wallets);
   const dispatch = useDispatch();
   const [seeFavorites, setSeeFavorites] = useState(false);
 
@@ -52,7 +55,11 @@ export const WalletsContainer = ({
           <Row justify="center">
             <Col>
               <WalletSelector
-                wallets={seeFavorites?wallets.filter(wallet => wallet.isFavorite):wallets}
+                wallets={
+                  seeFavorites
+                    ? wallets.filter((wallet) => wallet.isFavorite)
+                    : wallets
+                }
                 defaultValue={selectedWallet}
                 onChange={_handleSelect}
               />

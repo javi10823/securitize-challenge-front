@@ -1,3 +1,5 @@
+import { Wallet } from '../../interfaces'
+
 export const GET_WALLETS_REQUEST = "GetWalletsRequest";
 export const GET_WALLETS_REQUEST_SUCCESS = "GetWalletsRequestSuccess";
 export const GET_WALLETS_REQUEST_FAILED = "GetWalletsRequestFailed";
@@ -16,30 +18,36 @@ export const SET_FAVORITE_REQUEST_FAILED = "SetFavoriteRequestFailed";
 
 export const SELECT_WALLET = "SellectWallet";
 
+
+interface State {
+  wallets: Wallet[],
+  selectedWallet?: number,
+}
+
 const initialState = {
   wallets: [],
-  selectedWallet: null,
+  selectedWallet: undefined,
 };
 
-export const walletReducer = (state = initialState, action) => {
-  switch (action.type) {
+export const walletReducer = (state: State = initialState, { payload, type }) => {
+  switch (type) {
     case GET_WALLETS_REQUEST_SUCCESS:
-      return { ...state, wallets: action.payload };
+      return { ...state, wallets: payload };
     case SELECT_WALLET:
-      return { ...state, selectedWallet: action.payload };
+      return { ...state, selectedWallet: payload };
     case CREATE_WALLETS_REQUEST_SUCCESS:
-      return { ...state, wallets: action.payload };
+      return { ...state, wallets: payload };
     case REMOVE_WALLETS_REQUEST_SUCCESS:
       return {
         ...state,
-        wallets: action.payload,
-        selectedWallet: action.payload[0]?.id || null,
+        wallets: payload,
+        selectedWallet: payload[0]?.id || null,
       };
     case SET_FAVORITE_REQUEST_SUCCESS:
       return {
         ...state,
         wallets: state.wallets.map((wallet) =>
-          wallet.id === action.payload.id ? action.payload : wallet
+          wallet.id === payload.id ? payload : wallet
         ),
       };
     default:
