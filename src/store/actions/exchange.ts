@@ -1,4 +1,4 @@
-import { GET_RATES_REQUEST, MODIFY_RATES_REQUEST } from '../reducers/exchange';
+import { GET_RATES_REQUEST, MODIFY_RATES_REQUEST } from '../actionTypes';
 
 export const getRates = () => ({ type: GET_RATES_REQUEST });
 

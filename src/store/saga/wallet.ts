@@ -10,7 +10,7 @@ import {
   CreateWalletAction,
   SetFavoriteAction,
 } from '../../interfaces';
-import { walletsApi } from '../../services/wallets';
+import { walletsApi } from '../../services';
 import {
   CREATE_WALLETS_REQUEST,
   CREATE_WALLETS_REQUEST_FAILED,
@@ -24,7 +24,7 @@ import {
   SET_FAVORITE_REQUEST,
   SET_FAVORITE_REQUEST_FAILED,
   SET_FAVORITE_REQUEST_SUCCESS,
-} from '../reducers/wallets';
+} from '../actionTypes';
 
 function* getWallets(): Generator<CallEffect | PutEffect, void, AxiosResponse<Record<string, unknown>, Record<string, unknown>>> {
   try {

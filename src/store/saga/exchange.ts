@@ -7,14 +7,14 @@ import {
   takeEvery,
 } from 'redux-saga/effects';
 import { ModifyRatesAction } from '../../interfaces';
-import { exchangeApi } from '../../services/exchange';
+import { exchangeApi } from '../../services';
 import {
   GET_RATES_REQUEST,
   GET_RATES_REQUEST_FAILED,
   GET_RATES_REQUEST_SUCCESS,
   MODIFY_RATES_REQUEST,
   MODIFY_RATES_REQUEST_FAILED,
-} from '../reducers/exchange';
+} from '../actionTypes';
 
 function* getRates(): Generator<
   CallEffect | PutEffect,

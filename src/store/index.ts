@@ -3,8 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from './root-reducer';
 
-import { exchangeSaga } from './saga/exchange';
-import { walletSaga } from './saga/wallet';
+import { exchangeSaga, walletSaga } from './saga';
 
 const sagaMiddleware = createSagaMiddleware();
 

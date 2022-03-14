@@ -9,7 +9,7 @@ import {
   removeWallet,
   selectWallet,
   setFavorite,
-} from '../../store/actions/wallet';
+} from '../../store/actions';
 import { useAppSelector } from '../../hooks';
 import { Wallet } from '../../interfaces';
 import { Props } from './index.types';
