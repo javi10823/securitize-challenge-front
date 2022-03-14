@@ -35,7 +35,7 @@ export const HomeScreen = () => {
 
   return (
     <>
-      <WalletsContainer addWallet={() => setShowAddWalletModal(true)} />
+      <WalletsContainer addWallet={setShowAddWalletModal.bind(null, true)} />
       <ExchangeContainer
         ethBalance={wallets.find(({ id }) => id === selectedWallet)?.balance}
         rates={rates}
@@ -46,7 +46,7 @@ export const HomeScreen = () => {
       <AddWalletModal
         visible={showAddWalletModal}
         onSubmit={_handleCreate}
-        onClose={() => setShowAddWalletModal(false)}
+        onClose={setShowAddWalletModal.bind(null, false)}
       />
     </>
   );
