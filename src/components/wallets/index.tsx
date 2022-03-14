@@ -65,6 +65,7 @@ export const WalletsContainer = ({ addWallet }: Props) => {
                   }
                   onClick={() => setSeeFavorites(!seeFavorites)}
                   className={styles.action}
+                  disabled={loading}
                 />
               </Tooltip>
             </Col>
