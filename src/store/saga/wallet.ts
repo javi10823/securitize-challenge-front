@@ -30,9 +30,9 @@ function* getWallets(): Generator<CallEffect | PutEffect, void, AxiosResponse<Re
   try {
     const result = yield call(walletsApi.getWallets);
     yield put({ type: GET_WALLETS_REQUEST_SUCCESS, payload: result.data });
-  } catch (error) {
-    console.error('getWalletsRequest', error);
-    yield put({ type: GET_WALLETS_REQUEST_FAILED, payload: error });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    yield put({ type: GET_WALLETS_REQUEST_FAILED, payload: error.response?.data?.message });
   }
 }
 
@@ -46,8 +46,9 @@ function* createWallet(
       type: CREATE_WALLETS_REQUEST_SUCCESS,
       payload: newWallets.data,
     });
-  } catch (error) {
-    yield put({ type: CREATE_WALLETS_REQUEST_FAILED, payload: error });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    yield put({ type: CREATE_WALLETS_REQUEST_FAILED, payload: error.response?.data?.message });
   }
 }
 
@@ -63,8 +64,9 @@ function* removeWallet(): Generator<
       type: REMOVE_WALLETS_REQUEST_SUCCESS,
       payload: newWallets.data,
     });
-  } catch (error) {
-    yield put({ type: REMOVE_WALLETS_REQUEST_FAILED, payload: error });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    yield put({ type: REMOVE_WALLETS_REQUEST_FAILED, payload: error.response?.data?.message });
   }
 }
 
@@ -78,8 +80,9 @@ function* setFavorite(
       action.payload.favorite
     );
     yield put({ type: SET_FAVORITE_REQUEST_SUCCESS, payload: result.data });
-  } catch (error) {
-    yield put({ type: SET_FAVORITE_REQUEST_FAILED, payload: error });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    yield put({ type: SET_FAVORITE_REQUEST_FAILED, payload: error.response?.data?.message });
   }
 }
 

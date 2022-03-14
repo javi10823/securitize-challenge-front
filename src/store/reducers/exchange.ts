@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import { ExchangeReducerType } from '../../interfaces';
 import {
   GET_RATES_REQUEST,
@@ -25,6 +26,7 @@ export const exchangeReducer = (
     // Disable loader on error
   case MODIFY_RATES_REQUEST_FAILED:
   case GET_RATES_REQUEST_FAILED:
+    message.error(action.payload);
     return { ...state, loading: false };
   case GET_RATES_REQUEST_SUCCESS:
     return { ...state, rates: action.payload, loading: false };

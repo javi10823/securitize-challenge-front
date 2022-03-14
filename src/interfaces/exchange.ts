@@ -9,7 +9,8 @@ export interface Rates {
 
 export interface ExchangeReducerType {
   type: string;
-  payload: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  payload: any;
 }
 
 /// ACTIONS

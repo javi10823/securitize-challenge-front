@@ -24,8 +24,9 @@ function* getRates(): Generator<
   try {
     const result = yield call(exchangeApi.getRates);
     yield put({ type: GET_RATES_REQUEST_SUCCESS, payload: result.data });
-  } catch (error) {
-    yield put({ type: GET_RATES_REQUEST_FAILED, payload: error });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    yield put({ type: GET_RATES_REQUEST_FAILED, payload: error.response?.data?.message });
   }
 }
 
@@ -44,8 +45,9 @@ function* modifyRates(
     );
     const newRates = yield call(exchangeApi.getRates);
     yield put({ type: GET_RATES_REQUEST_SUCCESS, payload: newRates.data });
-  } catch (error) {
-    yield put({ type: MODIFY_RATES_REQUEST_FAILED, payload: error });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    yield put({ type: MODIFY_RATES_REQUEST_FAILED, payload: error.response?.data?.message });
   }
 }
 

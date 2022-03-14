@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import { Wallet, WalletReducerType } from '../../interfaces';
 import {
   CREATE_WALLETS_REQUEST,
@@ -43,6 +44,7 @@ export const walletReducer = (
   case CREATE_WALLETS_REQUEST_FAILED:
   case REMOVE_WALLETS_REQUEST_FAILED:
   case SET_FAVORITE_REQUEST_FAILED:
+    message.error(payload);
     return { ...state, loading: false };
   case GET_WALLETS_REQUEST_SUCCESS:
     return {
