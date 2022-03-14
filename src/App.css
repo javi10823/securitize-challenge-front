@@ -1,1 +1,7 @@
 @import '~antd/dist/antd.css';
+
+:root {
+    --bg-card: #F8F8F8;
+
+    --color-gold: #F5C242;
+}

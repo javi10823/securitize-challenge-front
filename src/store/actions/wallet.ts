@@ -4,7 +4,7 @@ import {
   REMOVE_WALLETS_REQUEST,
   SELECT_WALLET,
   SET_FAVORITE_REQUEST,
-} from "../actionTypes";
+} from '../actionTypes';
 
 export const getWallets = () => ({ type: GET_WALLETS_REQUEST });
 

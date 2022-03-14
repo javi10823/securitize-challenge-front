@@ -1,3 +1,3 @@
-export { exchangeReducer } from "./exchange";
+export { exchangeReducer } from './exchange';
 
-export { walletReducer } from "./wallets";
+export { walletReducer } from './wallets';

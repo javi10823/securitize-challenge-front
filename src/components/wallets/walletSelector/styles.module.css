@@ -3,10 +3,12 @@
   flex-direction: column;
   justify-content: center;
   overflow-y: scroll;
+  overflow-x: visible;
   max-height: 251px;
 }
 
 .button {
   margin-top: 5px;
   margin-bottom: 5px;
+  border-left-width: 1px;
 }

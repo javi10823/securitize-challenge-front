@@ -50,7 +50,7 @@ export const WalletData = ({ wallet, onDelete, onFavorite }: Props) => {
             shape="circle"
             onClick={() => onFavorite(id, !isFavorite)}
             icon={
-              isFavorite ? <StarFilled color="#F5C242" /> : <StarOutlined />
+              isFavorite ? <StarFilled style={{color: 'var(--color-gold)'}} /> : <StarOutlined />
             }
             className={styles.setFavorite}
           />

@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { ExchangeContainer } from "../components/exchange";
-import { AddWalletModal } from "../components/wallets/addWalletModal";
-import { WalletsContainer } from "../components/wallets";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Alert } from 'antd';
+import { ExchangeContainer } from '../components/exchange';
+import { AddWalletModal } from '../components/wallets/addWalletModal';
+import { WalletsContainer } from '../components/wallets';
 import {
   getRates,
   modifyRates,
   createWallet,
   getWallets,
   selectWallet,
-} from "../store/actions";
-import { useAppSelector } from "../hooks";
+} from '../store/actions';
+import { useAppSelector } from '../hooks';
 
 export const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,13 @@ export const HomeScreen = () => {
   return (
     <>
       <WalletsContainer addWallet={setShowAddWalletModal.bind(null, true)} />
+      {wallets?.find((wallet) => wallet.id === selectedWallet)?.isOld && (
+        <Alert
+          description="Wallet is old!"
+          type="warning"
+          showIcon
+        />
+      )}
       <ExchangeContainer
         ethBalance={wallets.find(({ id }) => id === selectedWallet)?.balance}
         rates={rates}

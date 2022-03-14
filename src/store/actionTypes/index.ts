@@ -5,7 +5,7 @@ export {
   MODIFY_RATES_REQUEST,
   MODIFY_RATES_REQUEST_SUCCESS,
   MODIFY_RATES_REQUEST_FAILED,
-} from "./exchange";
+} from './exchange';
 
 export {
   GET_WALLETS_REQUEST,
@@ -21,4 +21,4 @@ export {
   SET_FAVORITE_REQUEST_SUCCESS,
   SET_FAVORITE_REQUEST_FAILED,
   SELECT_WALLET,
-} from "./wallets";
+} from './wallets';
