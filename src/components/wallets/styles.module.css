@@ -11,3 +11,7 @@
 .action {
     margin-bottom: 19px;;
 }
+
+.walletDataContainer {
+    overflow-y: scroll;
+}

@@ -29,11 +29,7 @@ export const WalletsContainer = ({ addWallet }: Props) => {
   };
 
   const walletsContent = loading ? (
-    <Row justify="center">
-      <Col>
-        <Spin size="large" />
-      </Col>
-    </Row>
+    <Spin size="large" />
   ) : (
     <WalletSelector
       wallets={
@@ -48,7 +44,7 @@ export const WalletsContainer = ({ addWallet }: Props) => {
     <Row justify="center">
       <Col className={styles.col} xs={24} md={12}>
         <Card className={styles.card}>
-          <Row align='middle' justify='center'>
+          <Row align="middle" justify="center">
             <Col flex="auto">
               <Typography.Title>Select a wallet</Typography.Title>
             </Col>
@@ -58,7 +54,7 @@ export const WalletsContainer = ({ addWallet }: Props) => {
                   shape="circle"
                   icon={
                     seeFavorites ? (
-                      <StarFilled style={{color: 'var(--color-gold)'}} />
+                      <StarFilled style={{ color: 'var(--color-gold)' }} />
                     ) : (
                       <StarOutlined />
                     )
@@ -82,18 +78,29 @@ export const WalletsContainer = ({ addWallet }: Props) => {
             </Col>
           </Row>
           <Row justify="center">
-            <Col>{walletsContent}</Col>
+            <Col className={styles.walletDataContainer}>{walletsContent}</Col>
           </Row>
         </Card>
       </Col>
-      <Col className={styles.col} xs={24} md={12}>
+      <Col
+        className={styles.col}
+        xs={24}
+        md={12}>
         <Card className={styles.card}>
-          <Typography.Title>Wallet Data</Typography.Title>
-          <WalletData
-            wallet={getSelectedWallet()}
-            onDelete={_handleRemove}
-            onFavorite={_handleFavorite}
-          />
+          <Row>
+            <Col>
+              <Typography.Title>Wallet Data</Typography.Title>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <WalletData
+                wallet={getSelectedWallet()}
+                onDelete={_handleRemove}
+                onFavorite={_handleFavorite}
+              />
+            </Col>
+          </Row>
         </Card>
       </Col>
     </Row>
