@@ -3,9 +3,9 @@ import {
   Route,
   Navigate,
   Routes,
-} from "react-router-dom";
-import { RouteComponent } from "../interfaces";
-import { routes } from "./routes";
+} from 'react-router-dom';
+import { RouteComponent } from '../interfaces';
+import { routes } from './routes';
 
 export const NavigationContainer = () => {
   const _renderItem = ({ path, component }: RouteComponent, index: number) => (

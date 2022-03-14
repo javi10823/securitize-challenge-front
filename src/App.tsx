@@ -1,5 +1,5 @@
-import "./App.css";
-import { NavigationContainer } from "./navigation/NavigationContainer";
+import './App.css';
+import { NavigationContainer } from './navigation/NavigationContainer';
 
 const App = () => <NavigationContainer />;
 

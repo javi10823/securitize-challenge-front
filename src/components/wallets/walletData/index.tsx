@@ -1,8 +1,8 @@
-import { Button, List, Popconfirm, Tooltip, Typography } from "antd";
-import { StarFilled, StarOutlined } from "@ant-design/icons";
+import { Button, List, Popconfirm, Tooltip, Typography } from 'antd';
+import { StarFilled, StarOutlined } from '@ant-design/icons';
 
-import styles from "./styles.module.css";
-import { Props } from "./index.types";
+import styles from './styles.module.css';
+import { Props } from './index.types';
 
 export const WalletData = ({ wallet, onDelete, onFavorite }: Props) => {
   if (wallet) {
@@ -10,16 +10,16 @@ export const WalletData = ({ wallet, onDelete, onFavorite }: Props) => {
 
     const data = [
       {
-        name: "Wallet address",
+        name: 'Wallet address',
         value: address,
       },
       {
-        name: "Wallet ETH balance",
+        name: 'Wallet ETH balance',
         value: `${Number(balance)} ETH`,
       },
       {
-        name: "It's an old wallet?",
-        value: isOld ? "Yes" : "No",
+        name: 'It\'s an old wallet?',
+        value: isOld ? 'Yes' : 'No',
       },
     ];
 
@@ -45,7 +45,7 @@ export const WalletData = ({ wallet, onDelete, onFavorite }: Props) => {
         </Popconfirm>
 
         <Tooltip
-          title={isFavorite ? "Remove from favorites" : "Add to Favorites"}>
+          title={isFavorite ? 'Remove from favorites' : 'Add to Favorites'}>
           <Button
             shape="circle"
             onClick={() => onFavorite(id, isFavorite)}

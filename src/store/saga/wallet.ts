@@ -1,16 +1,16 @@
-import { AxiosResponse } from "axios";
+import { AxiosResponse } from 'axios';
 import {
   call,
   CallEffect,
   put,
   PutEffect,
   takeEvery,
-} from "redux-saga/effects";
+} from 'redux-saga/effects';
 import {
   CreateWalletAction,
   SetFavoriteAction,
-} from "../../interfaces";
-import { walletsApi } from "../../services/wallets";
+} from '../../interfaces';
+import { walletsApi } from '../../services/wallets';
 import {
   CREATE_WALLETS_REQUEST,
   CREATE_WALLETS_REQUEST_FAILED,
@@ -24,21 +24,21 @@ import {
   SET_FAVORITE_REQUEST,
   SET_FAVORITE_REQUEST_FAILED,
   SET_FAVORITE_REQUEST_SUCCESS,
-} from "../reducers/wallets";
+} from '../reducers/wallets';
 
-function* getWallets(): Generator<CallEffect | PutEffect, void, AxiosResponse<{}, {}>> {
+function* getWallets(): Generator<CallEffect | PutEffect, void, AxiosResponse<Record<string, unknown>, Record<string, unknown>>> {
   try {
     const result = yield call(walletsApi.getWallets);
     yield put({ type: GET_WALLETS_REQUEST_SUCCESS, payload: result.data });
   } catch (error) {
-    console.error("getWalletsRequest", error);
+    console.error('getWalletsRequest', error);
     yield put({ type: GET_WALLETS_REQUEST_FAILED, payload: error });
   }
 }
 
 function* createWallet(
   action: CreateWalletAction
-): Generator<CallEffect | PutEffect, void, AxiosResponse<{}, {}>> {
+): Generator<CallEffect | PutEffect, void, AxiosResponse<Record<string, unknown>, Record<string, unknown>>> {
   try {
     yield call(walletsApi.createWallet, action.payload);
     const newWallets = yield call(walletsApi.getWallets);
@@ -54,8 +54,8 @@ function* createWallet(
 function* removeWallet(): Generator<
   CallEffect | PutEffect,
   void,
-  AxiosResponse<{}, {}>
-> {
+  AxiosResponse<Record<string, unknown>, Record<string, unknown>>
+  > {
   try {
     yield call(walletsApi.removeWallet);
     const newWallets = yield call(walletsApi.getWallets);
@@ -70,7 +70,7 @@ function* removeWallet(): Generator<
 
 function* setFavorite(
   action: SetFavoriteAction
-): Generator<CallEffect | PutEffect, void, AxiosResponse<{}, {}>> {
+): Generator<CallEffect | PutEffect, void, AxiosResponse<Record<string, unknown>, Record<string, unknown>>> {
   try {
     const result = yield call(
       walletsApi.setFavorite,

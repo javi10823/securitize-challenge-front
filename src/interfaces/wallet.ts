@@ -11,7 +11,9 @@ export interface Wallet {
 
 export interface WalletReducerType {
   type: string;
-  payload: any
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  payload: any;
+  /* eslinbt*enable @typescript-eslint/no-explicit-any */
 }
 
 /// PAYLOADS

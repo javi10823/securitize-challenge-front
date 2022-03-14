@@ -1,21 +1,21 @@
-import { Form, Input, Modal } from "antd";
-import { Props } from "./index.types";
+import { Form, Input, Modal } from 'antd';
+import { Props } from './index.types';
 
 export const AddWalletModal = ({ visible, onSubmit, onClose }: Props) => {
   const [form] = Form.useForm();
 
   const _handleSubmit = () => {
-    if (form.getFieldError("address").length === 0) {
-        onSubmit(form.getFieldValue('address'));
-        form.resetFields()
-        return "";
+    if (form.getFieldError('address').length === 0) {
+      onSubmit(form.getFieldValue('address'));
+      form.resetFields();
+      return '';
     }
   };
 
   const _handleClose = () => {
-    form.resetFields()
-    onClose()
-  }
+    form.resetFields();
+    onClose();
+  };
 
   return (
     <Modal
@@ -24,7 +24,7 @@ export const AddWalletModal = ({ visible, onSubmit, onClose }: Props) => {
       onOk={_handleSubmit}
       onCancel={_handleClose}
     >
-      <Form form={form} initialValues={{ address: "" }}>
+      <Form form={form} initialValues={{ address: '' }}>
         <Form.Item
           name="address"
           label="Address"
@@ -32,11 +32,11 @@ export const AddWalletModal = ({ visible, onSubmit, onClose }: Props) => {
           rules={[
             {
               required: true,
-              message: "Please input the wallet address",
+              message: 'Please input the wallet address',
             },
             {
               pattern: /^0x[a-fA-F0-9]{40}$/,
-              message: "Incorrect ETH wallet address",
+              message: 'Incorrect ETH wallet address',
             },
           ]}
         >

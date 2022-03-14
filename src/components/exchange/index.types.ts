@@ -1,4 +1,4 @@
-import { Rates } from "../../interfaces";
+import { Rates } from '../../interfaces';
 
 export type Props = {
   ethBalance?: number;

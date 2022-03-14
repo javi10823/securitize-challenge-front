@@ -1,14 +1,16 @@
-import { applyMiddleware, compose, createStore } from "@reduxjs/toolkit";
-import createSagaMiddleware from "redux-saga";
+import { applyMiddleware, compose, createStore } from '@reduxjs/toolkit';
+import createSagaMiddleware from 'redux-saga';
 
-import rootReducer from "./root-reducer";
+import rootReducer from './root-reducer';
 
-import { exchangeSaga } from "./saga/exchange";
-import { walletSaga } from "./saga/wallet";
+import { exchangeSaga } from './saga/exchange';
+import { walletSaga } from './saga/wallet';
 
 const sagaMiddleware = createSagaMiddleware();
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export const store = createStore(
   rootReducer,

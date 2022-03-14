@@ -1,4 +1,4 @@
-import { Wallet } from "../../../interfaces";
+import { Wallet } from '../../../interfaces';
 
 export type Props = {
     wallets: Wallet[];

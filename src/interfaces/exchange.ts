@@ -9,7 +9,7 @@ export interface Rates {
 
 export interface ExchangeReducerType {
   type: string;
-  payload: any;
+  payload: unknown;
 }
 
 /// ACTIONS

@@ -1,31 +1,51 @@
-import { AxiosResponse } from "axios";
-import { call, CallEffect, put, PutEffect, takeEvery } from "redux-saga/effects";
-import { ModifyRatesAction } from "../../interfaces";
-import { exchangeApi } from "../../services/exchange";
+import { AxiosResponse } from 'axios';
+import {
+  call,
+  CallEffect,
+  put,
+  PutEffect,
+  takeEvery,
+} from 'redux-saga/effects';
+import { ModifyRatesAction } from '../../interfaces';
+import { exchangeApi } from '../../services/exchange';
 import {
   GET_RATES_REQUEST,
   GET_RATES_REQUEST_FAILED,
   GET_RATES_REQUEST_SUCCESS,
   MODIFY_RATES_REQUEST,
   MODIFY_RATES_REQUEST_FAILED,
-} from "../reducers/exchange";
+} from '../reducers/exchange';
 
-function* getRates(): Generator<CallEffect | PutEffect, void, AxiosResponse<{}, {}>> {
+function* getRates(): Generator<
+  CallEffect | PutEffect,
+  void,
+  AxiosResponse<Record<string, unknown>, Record<string, unknown>>
+  > {
   try {
     const result = yield call(exchangeApi.getRates);
-    yield put({ type: GET_RATES_REQUEST_SUCCESS, payload: result.data })
+    yield put({ type: GET_RATES_REQUEST_SUCCESS, payload: result.data });
   } catch (error) {
     yield put({ type: GET_RATES_REQUEST_FAILED, payload: error });
   }
 }
 
-function* modifyRates(action: ModifyRatesAction): Generator<CallEffect | PutEffect, void, AxiosResponse<{}, {}>> {
+function* modifyRates(
+  action: ModifyRatesAction
+): Generator<
+  CallEffect | PutEffect,
+  void,
+  AxiosResponse<Record<string, unknown>, Record<string, unknown>>
+> {
   try {
-    yield call(exchangeApi.modifyRates, action.payload.currency, action.payload.rates);
+    yield call(
+      exchangeApi.modifyRates,
+      action.payload.currency,
+      action.payload.rates
+    );
     const newRates = yield call(exchangeApi.getRates);
-    yield put({ type: GET_RATES_REQUEST_SUCCESS, payload: newRates.data })
+    yield put({ type: GET_RATES_REQUEST_SUCCESS, payload: newRates.data });
   } catch (error) {
-    yield put({ type: MODIFY_RATES_REQUEST_FAILED, payload: error })
+    yield put({ type: MODIFY_RATES_REQUEST_FAILED, payload: error });
   }
 }
 

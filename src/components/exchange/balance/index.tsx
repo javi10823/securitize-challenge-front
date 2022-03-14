@@ -1,6 +1,6 @@
-import { Col, Row, Select, Typography } from "antd";
-import { Props } from "./index.types";
-import styles from "./styles.module.css";
+import { Col, Row, Select, Typography } from 'antd';
+import { Props } from './index.types';
+import styles from './styles.module.css';
 
 export const Balance = ({ ethBalance, rates, selectedRate, onModify }: Props) => (
   <div>

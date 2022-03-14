@@ -1,8 +1,8 @@
-import { Radio, Typography } from "antd";
-import { RadioChangeEvent } from 'antd/lib/radio'
-import { Wallet } from "../../../interfaces";
-import { Props } from "./index.types";
-import styles from "./styles.module.css";
+import { Radio, Typography } from 'antd';
+import { RadioChangeEvent } from 'antd/lib/radio';
+import { Wallet } from '../../../interfaces';
+import { Props } from './index.types';
+import styles from './styles.module.css';
 
 export const WalletSelector = ({ wallets, defaultValue, onChange }: Props) => {
   const _handleSelect = (e: RadioChangeEvent) => {
@@ -10,7 +10,7 @@ export const WalletSelector = ({ wallets, defaultValue, onChange }: Props) => {
   };
 
   const RenderWallets = () => {
-    if (wallets.length > 0) {
+    if (wallets && wallets.length > 0) {
       return (
         <Radio.Group
           defaultValue={defaultValue || 0}

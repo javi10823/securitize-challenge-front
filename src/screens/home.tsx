@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { ExchangeContainer } from "../components/exchange";
-import { AddWalletModal } from "../components/wallets/addWalletModal";
-import { WalletsContainer } from "../components/wallets";
-import { getRates, modifyRates } from "../store/actions/exchange";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { ExchangeContainer } from '../components/exchange';
+import { AddWalletModal } from '../components/wallets/addWalletModal';
+import { WalletsContainer } from '../components/wallets';
+import { getRates, modifyRates } from '../store/actions/exchange';
 import {
   createWallet,
   getWallets,
   selectWallet,
-} from "../store/actions/wallet";
-import { useAppSelector } from "../hooks";
+} from '../store/actions/wallet';
+import { useAppSelector } from '../hooks';
 
 export const HomeScreen = () => {
   const dispatch = useDispatch();

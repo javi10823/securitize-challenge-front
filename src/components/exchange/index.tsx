@@ -1,9 +1,9 @@
-import { Row, Card, Col } from "antd";
-import { useState } from "react";
-import { Balance } from "./balance";
-import { Props } from "./index.types";
-import { Rates } from "./rates";
-import styles from "./styles.module.css";
+import { Row, Card, Col } from 'antd';
+import { useState } from 'react';
+import { Balance } from './balance';
+import { Props } from './index.types';
+import { Rates } from './rates';
+import styles from './styles.module.css';
 
 export const ExchangeContainer = ({ ethBalance, rates, modifyRates }: Props) => {
   const [selectedRate, setSelectedRate] = useState(0);

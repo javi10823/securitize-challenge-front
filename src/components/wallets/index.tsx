@@ -1,18 +1,18 @@
-import { Button, Card, Col, Row, Tooltip, Typography } from "antd";
-import { PlusOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
-import { WalletData } from "./walletData";
-import { WalletSelector } from "./walletSelector";
-import styles from "./styles.module.css";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { Button, Card, Col, Row, Tooltip, Typography } from 'antd';
+import { PlusOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
+import { WalletData } from './walletData';
+import { WalletSelector } from './walletSelector';
+import styles from './styles.module.css';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   removeWallet,
   selectWallet,
   setFavorite,
-} from "../../store/actions/wallet";
-import { useAppSelector } from "../../hooks";
-import { Wallet } from "../../interfaces";
-import { Props } from "./index.types";
+} from '../../store/actions/wallet';
+import { useAppSelector } from '../../hooks';
+import { Wallet } from '../../interfaces';
+import { Props } from './index.types';
 
 export const WalletsContainer = ({ addWallet }: Props) => {
   const { wallets, selectedWallet } = useAppSelector(({ wallets }) => wallets);
