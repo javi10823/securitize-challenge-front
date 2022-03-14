@@ -2,28 +2,27 @@ import { Button, List, Popconfirm, Tooltip, Typography } from "antd";
 import { StarFilled, StarOutlined } from "@ant-design/icons";
 
 import styles from "./styles.module.css";
+import { Props } from "./index.types";
 
-export const WalletData = ({
-  wallet: { address, balance, id, isFavorite, isOld },
-  onDelete,
-  onFavorite,
-}) => {
-  const data = [
-    {
-      name: "Wallet address",
-      value: address,
-    },
-    {
-      name: "Wallet ETH balance",
-      value: `${Number(balance)} ETH`,
-    },
-    {
-      name: "It's an old wallet?",
-      value: isOld ? "Yes" : "No",
-    },
-  ];
+export const WalletData = ({ wallet, onDelete, onFavorite }: Props) => {
+  if (wallet) {
+    const { address, balance, id, isFavorite, isOld } = wallet;
 
-  if (address) {
+    const data = [
+      {
+        name: "Wallet address",
+        value: address,
+      },
+      {
+        name: "Wallet ETH balance",
+        value: `${Number(balance)} ETH`,
+      },
+      {
+        name: "It's an old wallet?",
+        value: isOld ? "Yes" : "No",
+      },
+    ];
+
     return (
       <div>
         <List
@@ -39,16 +38,14 @@ export const WalletData = ({
           title="Are you sure to remove that wallet?"
           okText="Confirm"
           cancelText="Cancel"
-          onConfirm={onDelete.bind(null, id)}
-        >
+          onConfirm={onDelete.bind(null, id)}>
           <Button type="primary" danger>
             Remove Wallet
           </Button>
         </Popconfirm>
 
         <Tooltip
-          title={isFavorite ? "Remove from favorites" : "Add to Favorites"}
-        >
+          title={isFavorite ? "Remove from favorites" : "Add to Favorites"}>
           <Button
             shape="circle"
             onClick={() => onFavorite(id, isFavorite)}

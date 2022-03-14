@@ -11,20 +11,22 @@ import {
   setFavorite,
 } from "../../store/actions/wallet";
 import { useAppSelector } from "../../hooks";
+import { Wallet } from "../../interfaces";
+import { Props } from "./index.types";
 
-export const WalletsContainer = ({ addWallet }) => {
+export const WalletsContainer = ({ addWallet }: Props) => {
   const { wallets, selectedWallet } = useAppSelector(({ wallets }) => wallets);
   const dispatch = useDispatch();
   const [seeFavorites, setSeeFavorites] = useState(false);
 
-  const _handleSelect = (id) => dispatch(selectWallet(id));
-  const _handleRemove = (id) => dispatch(removeWallet(id));
-  const _handleFavorite = (id, favorite) => dispatch(setFavorite(id, favorite));
+  const _handleSelect = (id: number) => dispatch(selectWallet(id));
+  const _handleRemove = (id: number) => dispatch(removeWallet(id));
+  const _handleFavorite = (id: number, favorite: boolean) => dispatch(setFavorite(id, favorite));
 
-  const getSelectedWallet = () => {
+  const getSelectedWallet = (): Wallet | undefined => {
     if (wallets.length === 1) return wallets[0];
 
-    return wallets.find((wallet) => wallet.id === selectedWallet) || {};
+    return wallets.find((wallet) => wallet.id === selectedWallet);
   };
 
   return (

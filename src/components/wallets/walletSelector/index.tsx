@@ -1,8 +1,11 @@
 import { Radio, Typography } from "antd";
+import { RadioChangeEvent } from 'antd/lib/radio'
+import { Wallet } from "../../../interfaces";
+import { Props } from "./index.types";
 import styles from "./styles.module.css";
 
-export const WalletSelector = ({ wallets, defaultValue, onChange }) => {
-  const _handleSelect = (e) => {
+export const WalletSelector = ({ wallets, defaultValue, onChange }: Props) => {
+  const _handleSelect = (e: RadioChangeEvent) => {
     onChange(e.target.value);
   };
 
@@ -14,7 +17,7 @@ export const WalletSelector = ({ wallets, defaultValue, onChange }) => {
           onChange={_handleSelect}
           className={styles.container}
         >
-          {wallets.map((wallet, index) => (
+          {wallets.map((wallet: Wallet) => (
             <Radio.Button
               value={wallet.id}
               key={wallet.id}

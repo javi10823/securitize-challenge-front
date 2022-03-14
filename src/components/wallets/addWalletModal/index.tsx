@@ -1,25 +1,28 @@
 import { Form, Input, Modal } from "antd";
-import { useState } from "react";
+import { Props } from "./index.types";
 
-export const AddWalletModal = ({ visible, onSubmit, onClose }) => {
-  const [address, setAddress] = useState("");
+export const AddWalletModal = ({ visible, onSubmit, onClose }: Props) => {
   const [form] = Form.useForm();
 
   const _handleSubmit = () => {
     if (form.getFieldError("address").length === 0) {
-      setAddress((prevState) => {
-        onSubmit(prevState);
+        onSubmit(form.getFieldValue('address'));
+        form.resetFields()
         return "";
-      });
     }
   };
+
+  const _handleClose = () => {
+    form.resetFields()
+    onClose()
+  }
 
   return (
     <Modal
       title="Add new Wallet"
       visible={visible}
       onOk={_handleSubmit}
-      onCancel={onClose}
+      onCancel={_handleClose}
     >
       <Form form={form} initialValues={{ address: "" }}>
         <Form.Item
@@ -39,7 +42,6 @@ export const AddWalletModal = ({ visible, onSubmit, onClose }) => {
         >
           <Input
             placeholder="0x0000000000000000000000000000000000000000"
-            onChange={({ target: { value } }) => setAddress(value)}
           />
         </Form.Item>
       </Form>

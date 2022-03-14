@@ -1,7 +1,38 @@
+type Address = string;
 export interface Wallet {
-  address: string,
-  balance: number,
-  id: number,
-  isFavorite: boolean,
-  isOld: boolean
+  address: Address;
+  balance: number;
+  id: number;
+  isFavorite: boolean;
+  isOld: boolean;
+}
+
+/// REDUCERS
+
+export interface WalletReducerType {
+  type: string;
+  payload: any
+}
+
+/// PAYLOADS
+
+export type GetWalletsRequestSuccessPayload = Wallet[];
+export type CreateWalletSuccessPayload = Wallet[];
+export type RemoveWalletRequestSuccessPayload = Wallet[];
+export type SetFavoriteRequestSuccessPayload = Wallet;
+export type SelectWalletPayload = number;
+
+/// ACTIONS
+
+export interface CreateWalletAction {
+  type: string;
+  payload: Address;
+}
+
+export interface SetFavoriteAction {
+  type: string;
+  payload: {
+    id: number;
+    favorite: boolean;
+  };
 }

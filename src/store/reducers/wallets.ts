@@ -1,4 +1,4 @@
-import { Wallet } from '../../interfaces'
+import { Wallet, WalletReducerType } from "../../interfaces";
 
 export const GET_WALLETS_REQUEST = "GetWalletsRequest";
 export const GET_WALLETS_REQUEST_SUCCESS = "GetWalletsRequestSuccess";
@@ -18,10 +18,9 @@ export const SET_FAVORITE_REQUEST_FAILED = "SetFavoriteRequestFailed";
 
 export const SELECT_WALLET = "SellectWallet";
 
-
 interface State {
-  wallets: Wallet[],
-  selectedWallet?: number,
+  wallets: Wallet[];
+  selectedWallet?: number;
 }
 
 const initialState = {
@@ -29,14 +28,23 @@ const initialState = {
   selectedWallet: undefined,
 };
 
-export const walletReducer = (state: State = initialState, { payload, type }) => {
+export const walletReducer = (
+  state: State = initialState,
+  { payload, type }: WalletReducerType
+): State => {
   switch (type) {
     case GET_WALLETS_REQUEST_SUCCESS:
-      return { ...state, wallets: payload };
+      return {
+        ...state,
+        wallets: payload,
+        selectedWallet: payload[0]?.id || null,
+      };
     case SELECT_WALLET:
       return { ...state, selectedWallet: payload };
     case CREATE_WALLETS_REQUEST_SUCCESS:
-      return { ...state, wallets: payload };
+      return { ...state, wallets: payload,
+        selectedWallet:
+          payload.length > 1 ? payload[0].id : state.selectedWallet, };
     case REMOVE_WALLETS_REQUEST_SUCCESS:
       return {
         ...state,

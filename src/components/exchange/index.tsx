@@ -1,13 +1,14 @@
 import { Row, Card, Col } from "antd";
 import { useState } from "react";
 import { Balance } from "./balance";
+import { Props } from "./index.types";
 import { Rates } from "./rates";
 import styles from "./styles.module.css";
 
-export const ExchangeContainer = ({ ethBalance, rates, modifyRates }) => {
+export const ExchangeContainer = ({ ethBalance, rates, modifyRates }: Props) => {
   const [selectedRate, setSelectedRate] = useState(0);
 
-  const _handleModify = (rate) => {
+  const _handleModify = (rate: string) => {
     modifyRates(rates[selectedRate]?.currency, rate);
   };
 
@@ -16,7 +17,7 @@ export const ExchangeContainer = ({ ethBalance, rates, modifyRates }) => {
       <Col className={styles.col} span={12}>
         <Card className={styles.card}>
           <Rates
-            rates={(rates && rates[selectedRate]?.rates) || 0}
+            rates={(rates && rates[selectedRate]?.rates) || '0'}
             onModify={_handleModify}
           />
         </Card>

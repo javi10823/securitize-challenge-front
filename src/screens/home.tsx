@@ -17,7 +17,7 @@ export const HomeScreen = () => {
   const { rates } = useAppSelector(({ exchange }) => exchange);
   const [showAddWalletModal, setShowAddWalletModal] = useState(false);
 
-  const _handleCreate = (address) => {
+  const _handleCreate = (address: string) => {
     dispatch(createWallet(address));
     setShowAddWalletModal(false);
   };
@@ -39,7 +39,7 @@ export const HomeScreen = () => {
       <ExchangeContainer
         ethBalance={wallets.find(({ id }) => id === selectedWallet)?.balance}
         rates={rates}
-        modifyRates={(currency, rates) =>
+        modifyRates={(currency: string, rates: string) =>
           dispatch(modifyRates(currency, rates))
         }
       />
