@@ -1,8 +1,8 @@
-import { Input, Row, Col, Button, Tooltip, Typography } from "antd";
-import { CheckOutlined, CloseOutlined, FormOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
-import { Props } from "./index.types";
-import styles from "./styles.module.css";
+import { Input, Row, Col, Button, Tooltip, Typography } from 'antd';
+import { CheckOutlined, CloseOutlined, FormOutlined } from '@ant-design/icons';
+import { useEffect, useState } from 'react';
+import { Props } from './index.types';
+import styles from './styles.module.css';
 
 export const Rates = ({ rates, onModify }: Props) => {
   const [isEditing, setIsEditing] = useState(false);

@@ -38,7 +38,7 @@ export const HomeScreen = () => {
   return (
     <>
       <WalletsContainer addWallet={setShowAddWalletModal.bind(null, true)} />
-      {wallets?.find((wallet) => wallet.id === selectedWallet)?.isOld && (
+      {wallets && wallets?.find((wallet) => wallet.id === selectedWallet)?.isOld && (
         <Alert
           description="Wallet is old!"
           type="warning"

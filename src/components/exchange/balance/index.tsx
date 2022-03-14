@@ -1,7 +1,7 @@
-import { Col, Row, Select, Typography } from "antd";
-import { currencyMapper } from "../../../utils/currency";
-import { Props } from "./index.types";
-import styles from "./styles.module.css";
+import { Col, Row, Select, Typography } from 'antd';
+import { currencyMapper } from '../../../utils/currency';
+import { Props } from './index.types';
+import styles from './styles.module.css';
 
 export const Balance = ({
   ethBalance,
@@ -13,8 +13,8 @@ export const Balance = ({
     <Row>
       <Col>
         <Typography.Title>
-          Balance in{" "}
-          {rates && rates[selectedRate] ? rates[selectedRate].currency : "..."}
+          Balance in{' '}
+          {rates && rates[selectedRate] ? rates[selectedRate].currency : '...'}
         </Typography.Title>
       </Col>
     </Row>
@@ -40,7 +40,7 @@ export const Balance = ({
           )}
           {(ethBalance && rates
             ? ethBalance * parseInt(rates[selectedRate]?.rates)
-            : "0"
+            : '0'
           ).toLocaleString()}
         </Typography.Title>
       </Col>
