@@ -48,9 +48,11 @@ export const WalletsContainer = ({ addWallet }: Props) => {
     <Row justify="center">
       <Col className={styles.col} xs={24} md={12}>
         <Card className={styles.card}>
-          <Row>
+          <Row align='middle' justify='center'>
             <Col flex="auto">
               <Typography.Title>Select a wallet</Typography.Title>
+            </Col>
+            <Col>
               <Tooltip title="See favorites">
                 <Button
                   shape="circle"
@@ -62,6 +64,7 @@ export const WalletsContainer = ({ addWallet }: Props) => {
                     )
                   }
                   onClick={() => setSeeFavorites(!seeFavorites)}
+                  className={styles.action}
                 />
               </Tooltip>
             </Col>
@@ -72,6 +75,7 @@ export const WalletsContainer = ({ addWallet }: Props) => {
                   icon={<PlusOutlined />}
                   onClick={addWallet}
                   disabled={loading}
+                  className={styles.action}
                 />
               </Tooltip>
             </Col>
